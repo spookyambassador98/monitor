@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dynamic Chart with Plotly</title>
+  <style>
+    body {
+      background-color: #000000;
+      color: white;
+    }
+  </style>
+</head>
+<body>
+  <div id="dynamic-chart"></div>
+  <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+  <script src="/socket.io/socket.io.js"></script>
+  <script>
+    const socket = io();
+    const initialData = {
+      x: Array.from({length: 10}, (_, i) => i + 1),
+      y: new Array(10).fill(1),
+      type: 'scatter',
+      mode: 'lines',
+      line: {color: 'green'}
+    };
+
+    const layout = {
+      plot_bgcolor: "#000",
+      paper_bgcolor: "#000",
+      xaxis: {color: "white"},
+      yaxis: {color: "white", range: [0, 2]}
+    };
+
+    Plotly.newPlot('dynamic-chart', [initialData], layout);
+
+    function updateChart() {
+      let changeDetected = false;
+
+      socket.once('mongoChange', () => {
+        changeDetected = true;
+        initialData.y.push(2);
+      });
+
+      if (!changeDetected) {
+        initialData.y.push(1);
+      }
+
+      if (initialData.y.length > 10) initialData.y.shift();
+      Plotly.update('dynamic-chart', {y: [initialData.y]});
+    }
+
+    setInterval(updateChart, 1000);
+  </script>
+</body>
+</html>

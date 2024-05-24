@@ -1,0 +1,33 @@
+{
+  "name": "project_1",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon index"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/spookyambassador98/project_1.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/spookyambassador98/project_1/issues"
+  },
+  "homepage": "https://github.com/spookyambassador98/project_1#readme",
+  "dependencies": {
+    "ejs": "^3.1.10",
+    "express": "^4.18.2",
+    "express-session": "^1.18.0",
+    "http": "^0.0.1-security",
+    "mongoose": "^8.2.0",
+    "nodemon": "^3.1.0",
+    "npx": "^10.2.2",
+    "ping": "^0.4.4",
+    "pug": "^3.0.2",
+    "session": "^0.1.0",
+    "socket.io": "^4.7.5"
+  }
+}
